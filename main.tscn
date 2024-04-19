@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://h8bf6t7kyoda"]
+
+[ext_resource type="Texture2D" uid="uid://dvkh4u5dce148" path="res://icon.svg" id="1_j0rtt"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(182, 166)
+texture = ExtResource("1_j0rtt")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(761, 168)
+texture = ExtResource("1_j0rtt")
+
+[node name="Rocky" type="Node2D" parent="."]
+
+[node name="rock1" type="Node2D" parent="Rocky"]
+
+[node name="rock2" type="Node2D" parent="Rocky"]
+
+[node name="rock3" type="Node2D" parent="Rocky"]
+
+[node name="rockden" type="Node2D" parent="."]
