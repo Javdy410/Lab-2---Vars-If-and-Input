@@ -1,23 +1,85 @@
-[gd_scene load_steps=2 format=3 uid="uid://h8bf6t7kyoda"]
+[gd_scene load_steps=12 format=3 uid="uid://h8bf6t7kyoda"]
 
-[ext_resource type="Texture2D" uid="uid://dvkh4u5dce148" path="res://icon.svg" id="1_j0rtt"]
+[ext_resource type="Texture2D" uid="uid://mgf7r81a2wsu" path="res://kenney_animal-pack-redux copy/PNG/Round/buffalo.png" id="1_3kk5j"]
+[ext_resource type="Texture2D" uid="uid://dok12k3h76jtb" path="res://kenney_animal-pack-redux copy/PNG/Round/chicken.png" id="2_e08s7"]
+[ext_resource type="PackedScene" uid="uid://dfrpxglo1ijay" path="res://rock_1.tscn" id="3_tequ0"]
+[ext_resource type="Script" path="res://Icon2.gd" id="4_hvrg3"]
+[ext_resource type="PackedScene" uid="uid://e64y6pktllu2" path="res://rockden.tscn" id="4_k51yk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5bs3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hm82q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3ode"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p33y4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irxud"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lp2on"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(182, 166)
-texture = ExtResource("1_j0rtt")
+[node name="CharacterBody2D(idle)" type="CharacterBody2D" parent="."]
+position = Vector2(761, 157)
 
-[node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(761, 168)
-texture = ExtResource("1_j0rtt")
+[node name="Icon2" type="Sprite2D" parent="CharacterBody2D(idle)"]
+position = Vector2(-321, -9)
+texture = ExtResource("2_e08s7")
+script = ExtResource("4_hvrg3")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D(idle)/Icon2" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D(idle)/Icon2/Area2D"]
+shape = SubResource("CapsuleShape2D_o5bs3")
+
+[node name="CharacterBody2D(idle)" type="CharacterBody2D" parent="CharacterBody2D(idle)"]
+
+[node name="Icon" type="Sprite2D" parent="CharacterBody2D(idle)/CharacterBody2D(idle)"]
+position = Vector2(-609, -7)
+texture = ExtResource("1_3kk5j")
+script = ExtResource("4_hvrg3")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D(idle)/CharacterBody2D(idle)/Icon" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D(idle)/CharacterBody2D(idle)/Icon/Area2D"]
+shape = SubResource("CapsuleShape2D_hm82q")
 
 [node name="Rocky" type="Node2D" parent="."]
 
-[node name="rock1" type="Node2D" parent="Rocky"]
+[node name="rock1" parent="Rocky" instance=ExtResource("3_tequ0")]
+position = Vector2(682, 305)
 
-[node name="rock2" type="Node2D" parent="Rocky"]
+[node name="Area2D" type="Area2D" parent="Rocky/rock1" groups=["enemy"]]
+position = Vector2(266, -91)
 
-[node name="rock3" type="Node2D" parent="Rocky"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocky/rock1/Area2D"]
+position = Vector2(-227, -393)
+shape = SubResource("CapsuleShape2D_q3ode")
 
-[node name="rockden" type="Node2D" parent="."]
+[node name="rock2" parent="Rocky" instance=ExtResource("3_tequ0")]
+position = Vector2(942, 299)
+
+[node name="Area2D" type="Area2D" parent="Rocky/rock2" groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocky/rock2/Area2D"]
+shape = SubResource("CapsuleShape2D_p33y4")
+
+[node name="rock3" parent="Rocky" instance=ExtResource("3_tequ0")]
+position = Vector2(926, 603)
+
+[node name="Area2D" type="Area2D" parent="Rocky/rock3" groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocky/rock3/Area2D"]
+shape = SubResource("CapsuleShape2D_irxud")
+
+[node name="rockden" parent="." instance=ExtResource("4_k51yk")]
+position = Vector2(189, 499)
+
+[node name="Area2D" type="Area2D" parent="rockden"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rockden/Area2D" groups=["enemy"]]
+shape = SubResource("CapsuleShape2D_lp2on")
+
+[connection signal="area_entered" from="CharacterBody2D(idle)/Icon2/Area2D" to="CharacterBody2D(idle)/Icon2" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="CharacterBody2D(idle)/CharacterBody2D(idle)/Icon/Area2D" to="CharacterBody2D(idle)/CharacterBody2D(idle)/Icon" method="_on_area_2d_area_entered"]

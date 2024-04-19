@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://e64y6pktllu2"]
+
+[ext_resource type="Texture2D" uid="uid://dofy6ry0qqvlj" path="res://rocken copy.jpeg" id="1_2cri5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_orxi8"]
+
+[node name="rockden" type="Node2D"]
+position = Vector2(286, 522)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.99994, -25)
+scale = Vector2(0.333333, 0.422581)
+texture = ExtResource("1_2cri5")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("CapsuleShape2D_orxi8")
